@@ -1,0 +1,14 @@
+name: tesseratjs_dart
+description: Dart wrapper for tesseractjs.
+version: 0.1.0
+homepage: https://github.com/Hecatoncheir/tesseractjs_dart
+
+environment:
+  sdk: ">=2.17.3 <3.0.0"
+
+dependencies:
+  js: ^0.6.4
+
+dev_dependencies:
+  lints: ^2.0.0
+  dart_code_metrics: ^4.15.2

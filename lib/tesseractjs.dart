@@ -1,0 +1,1 @@
+library tesseractjs_dart;

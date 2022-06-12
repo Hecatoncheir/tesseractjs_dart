@@ -1,0 +1,53 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  exclude:
+    - packages
+  plugins:
+    - dart_code_metrics
+
+linter:
+  rules:
+    - cancel_subscriptions
+    - close_sinks
+    - curly_braces_in_flow_control_structures
+
+dart_code_metrics:
+  anti-patterns:
+    - long-method
+    - long-parameter-list
+  metrics:
+    cycloramic-complexity: 5
+    maximum-nesting-level: 5
+    number-of-parameters: 4
+    source-lines-of-code: 250
+  metrics-exclude:
+    - test/**
+  rules:
+    - avoid-ignoring-return-values:
+      exclude:
+        - test/**
+    - avoid-non-null-assertion
+    - avoid-unused-parameters
+    - binary-expression-operand-order
+    - double-literal-format
+    - member-ordering:
+        exclude:
+          - test/**
+    - member-ordering-extended:
+        exclude:
+          - test/**
+    - no-boolean-literal-compare
+    - no-empty-block
+    - no-equal-then-else
+    - no-magic-number:
+        exclude:
+          - test/**
+          - lib/ui/**
+          - lib/theme/**
+    - no-object-declaration
+    - prefer-conditional-expressions
+    - prefer-trailing-comma:
+        exclude:
+          - test/**
+    - check-unused-l10n command
