@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+
+import 'tesseract.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +29,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Scaffold(
+        body: MyHomePage(
+          title: 'Flutter Demo Home Page',
+        ),
+      ),
     );
   }
 }
@@ -48,6 +57,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Future(() async {});
+    });
+  }
+
   int _counter = 0;
 
   void _incrementCounter() {
@@ -63,6 +81,34 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    return ElevatedButton(
+      child: Text('UPLOAD FILE'),
+      onPressed: () async {
+        var result = await FilePicker.platform.pickFiles();
+        if (result == null) return;
+
+        final file = result.files.first;
+        final bytes = file.bytes;
+        if (bytes == null) return;
+
+        final encodedImage = base64.encode(file.bytes!);
+        final uriData = "data:image/png;base64, $encodedImage";
+
+        final imagePath = uriData;
+        const language = "rus";
+        // const language = "eng";
+        final text = await recognize(imagePath, language);
+
+        print("TEXT: ${text}");
+
+        final snackBar = SnackBar(
+          content: Text(text),
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      },
+    );
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
