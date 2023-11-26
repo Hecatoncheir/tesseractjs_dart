@@ -14,11 +14,26 @@ or:
  <script src='tesseract.min.js'></script>
 ```
 
-### dart
+### Dart
 ```dart
+import 'dart:convert';
 import "package:tesseratjs_dart/tesseractjs.dart";
 
 void main(){
+  var result = await FilePicker.platform.pickFiles();
+  if (result == null) return;
 
+  final image = result.files.first;
+  if (image == null) return null;
+
+  final bytes = image.bytes;
+  if (bytes == null) return null;
+
+  final encodedImage = base64.encode(bytes);
+  final uriData = "data:image/png;base64, $encodedImage";
+
+  final imagePath = uriData;
+  final text = await recognize(imagePath, language);
+  print(text);
 }
 ```
