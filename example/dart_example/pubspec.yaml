@@ -9,6 +9,9 @@ environment:
 # Add regular dependencies here.
 dependencies:
   # path: ^1.8.0
+  file_picker: ^6.1.1
+  tesseratjs_dart:
+    path: "../../"
 
 dev_dependencies:
   build_runner: ^2.4.0
