@@ -3,7 +3,15 @@
 ### HTML
 <br>Add CDN to `HEAD`:
 ```HTML
-<script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
+<!-- v5 -->
+<script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
+```
+
+or:
+```html
+ <script src='worker.min.js'></script>
+ <script src='tesseract-core-simd-lstm.wasm.js'></script>
+ <script src='tesseract.min.js'></script>
 ```
 
 ### dart
